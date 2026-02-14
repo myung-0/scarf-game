@@ -506,3 +506,27 @@ p{
   width: var(--btnSize) !important;
   height: var(--btnSize) !important;
 }
+
+/* 📱 모바일 대응 */
+@media (max-width: 600px) {
+
+  /* 게임 카드 전체 살짝 줄이기 */
+  .game-card{
+    width: 92vw;
+    padding: 14px;
+  }
+
+  /* 화살표 버튼 자동 축소 */
+  .arrow-btn{
+    width: 18vw;
+    height: 18vw;
+    font-size: 6vw;
+  }
+
+  /* 버튼 그리드 자동 줄바꿈 */
+  #arrowButtons{
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px;
+    justify-content: center;
+  }
+}
