@@ -146,13 +146,18 @@ function renderArrowButtons() {
 
   const n = stage.selectableDirections.length;
 
-  // ✅ 스테이지별 레이아웃 고정
-  // 2개(←→)는 2열, 4개는 4열, 8개는 4열(2줄)로
-  const cols = (n === 2) ? 2 : (n === 4) ? 4 : 4;
-
-  // ✅ 스테이지5(8개)는 버튼을 더 작게 해서 2줄이 카드 안에 다 보이게
-  const btnSize = (n === 8) ? 95 : (n === 4) ? 150 : 170;
-
+  /* ✅ 버튼 배열 방식만 JS에서 결정
+     사이즈는 CSS가 담당 */
+  if (n === 2) {
+    container.style.gridTemplateColumns = "repeat(2, var(--btnSize))";
+  } 
+  else if (n === 4) {
+    container.style.gridTemplateColumns = "repeat(4, var(--btnSize))";
+  } 
+  else if (n === 8) {
+    // ⭐ 스테이지5: 4개씩 2줄
+    container.style.gridTemplateColumns = "repeat(4, var(--btnSize))";
+  }
 
   stage.selectableDirections.forEach(direction => {
     const btn = document.createElement('button');
@@ -162,6 +167,7 @@ function renderArrowButtons() {
     container.appendChild(btn);
   });
 }
+
 
 
 function showPlayerInputArea() {
