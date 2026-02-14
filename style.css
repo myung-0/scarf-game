@@ -525,3 +525,9 @@ p{
   align-items: center !important;
   justify-content: center !important;
 }
+
+:root { --btnSize: 85px; } /* 기본(PC 포함) */
+
+@media (max-width: 600px){
+  :root { --btnSize: 64px; } /* 모바일에서만 더 작게 */
+}
