@@ -1,8 +1,8 @@
 const STAGES = [
     { name: '스테이지 1', desc: '양옆 방향 화살표 4개', sequence: 4, directions: ['←', '→'], selectableDirections: ['←', '→'] },
     { name: '스테이지 2', desc: '양옆 방향 화살표 6개', sequence: 6, directions: ['←', '→'], selectableDirections: ['←', '→'] },
-    { name: '스테이지 3', desc: '양옆, 위아래 방향 화살표 5개', sequence: 5, directions: ['←', '→', '↑', '↓'], selectableDirections: ['←', '→', '↑', '↓'] },
-    { name: '스테이지 4', desc: '양옆, 위아래 방향 화살표 7개', sequence: 7, directions: ['←', '→', '↑', '↓'], selectableDirections: ['←', '→', '↑', '↓'] },
+    { name: '스테이지 3', desc: '양옆, 위아래 방향 화살표 4개', sequence: 4, directions: ['←', '→', '↑', '↓'], selectableDirections: ['←', '→', '↑', '↓'] },
+    { name: '스테이지 4', desc: '양옆, 위아래 방향 화살표 6개', sequence: 6, directions: ['←', '→', '↑', '↓'], selectableDirections: ['←', '→', '↑', '↓'] },
     { name: '스테이지 5', desc: '8방향 화살표 5개', sequence: 5, directions: ['←', '→', '↑', '↓', '↖', '↗', '↙', '↘'], selectableDirections: ['←', '→', '↑', '↓', '↖', '↗', '↙', '↘'] }
 ];
 

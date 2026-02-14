@@ -299,26 +299,6 @@ p{
   margin-bottom: 10px;
 }
 
-.arrow-buttons{
-  display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  width: 100%;
-}
-
-/* arrow buttons */
-.arrow-btn{
-  aspect-ratio: 1;
-  font-size: 34px;
-  border: 2px solid #74b9ff;
-  background: white;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.12s ease;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
 
 .arrow-btn:hover{
   background: #e0f2ff;
@@ -516,12 +496,7 @@ p{
     padding: 14px;
   }
 
-  /* 화살표 버튼 자동 축소 */
-  .arrow-btn{
-    width: 18vw;
-    height: 18vw;
-    font-size: 6vw;
-  }
+
 
   /* 버튼 그리드 자동 줄바꿈 */
   #arrowButtons{
@@ -548,4 +523,29 @@ p{
   width: var(--btnSize) !important;
   height: var(--btnSize) !important;
   font-size: 30px !important;
+}
+
+/* ✅ 화살표 버튼: 전 스테이지 스테이지5 크기(120px)로 통일 + 가운데정렬 */
+:root{ --btnSize: 120px; }
+
+#arrowButtons{
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, var(--btnSize)) !important; /* 필요한 개수만큼 자동 */
+  justify-content: center !important;
+  justify-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin-top: 14px !important;
+}
+
+#arrowButtons .arrow-btn{
+  width: var(--btnSize) !important;
+  height: var(--btnSize) !important;
+  font-size: 30px !important;
+  border-radius: 18px !important;
+  border: 2px solid #8fb5ff !important;
+  background: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
