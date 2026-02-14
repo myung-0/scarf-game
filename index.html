@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핑구와 목도리 뜨기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-card">
+        <!-- 메인 화면 -->
+        <div id="mainScreen" class="screen active">
+            <div class="penguin-welcome">
+                <img src="핑구1.png" alt="펭귀" style="width: 100%; max-width: 220px; min-width: 120px; height: auto; object-fit: contain; border-radius: 0; margin: 0 auto 24px auto; display: block;">
+            </div>
+            <h1>핑구와 목도리 뜨기</h1>
+            <p>핑구가 알려주는 방향을 기억하고<br>목도리를 완성해보자!</p>
+            <button class="btn btn-primary" onclick="startGame()">시작</button>
+        </div>
+
+        <!-- 카운트다운 화면 -->
+        <div id="countdownScreen" class="screen">
+            <div class="countdown-display" id="countdownNum">3</div>
+            <p>게임 시작 준비!</p>
+        </div>
+
+        <!-- 게임 화면 -->
+        <div id="gameScreen" class="screen">
+            <div class="stage-info">
+                <p id="stageName">스테이지 1</p>
+                <p id="stageDesc">양옆 방향 화살표 4개</p>
+            </div>
+
+            <!-- 시퀀스 표시 영역 -->
+            <div id="sequenceDisplay" class="sequence-display">
+                <div class="sequence-title">핑구의 뜨개질 순서</div>
+                <div id="sequenceArrows" class="sequence-arrows"></div>
+                <div id="sequenceTimer" class="sequence-timer">5초 안에 기억해주세요!</div>
+            </div>
+
+            <!-- 플레이어 입력 영역 -->
+            <div id="playerInputArea" class="player-input-area" style="display:none;">
+                <div class="player-title">당신이 누른 순서</div>
+                <div id="playerArrows" class="player-arrows"></div>
+                
+                <div class="button-controls">
+                    <button class="btn btn-secondary" onclick="undoInput()">지우기</button>
+                    <button class="btn btn-success" id="submitBtn" onclick="submitInput()" style="display:none;">완료</button>
+                </div>
+
+                <div id="arrowButtons" class="arrow-buttons"></div>
+            </div>
+        </div>
+
+        <!-- 성공 화면 -->
+        <div id="successScreen" class="screen">
+            <div class="success-content">
+                <p id="successMessage">첫 번째 단을 완성했다!</p>
+                <p id="scarfProgress"></p>
+
+                <button class="btn btn-primary" id="nextStageBtn" onclick="nextStage()">다음 단 뜨기</button>
+
+                <button class="btn btn-primary" id="finalBtn" onclick="showFinalSuccess()" style="display:none;">드디어 완성!</button>
+            </div>
+        </div>
+
+
+        <!-- 실패 화면 -->
+        <div id="failScreen" class="screen">
+            <div class="fail-content">
+                <div class="penguin-sad">
+                    <img src="핑구2.jpeg" alt="슬픈 펭귀" style="width: 70px; height: 70px; border-radius: 10px; object-fit: cover;">
+                </div>
+                <p>이런! 실이 엉켜버렸다.<br>다 풀고 처음부터 다시 해보자ㅠㅠ</p>
+                <button class="btn btn-danger" onclick="restartGame()">다시하기</button>
+            </div>
+        </div>
+
+        <!-- 최종 성공 화면 -->
+        <div id="finalScreen" class="screen">
+            <div class="fireworks">
+                <div class="firework" id="firework1"></div>
+                <div class="firework" id="firework2"></div>
+            </div>
+            <p class="final-message">목도리를 완성했어~!</p>
+            <div class="final-content">
+                <div class="penguin-celebrate">
+                    <img src="핑구3.jpeg" alt="행복한 펭귀" style="width: 90px; height: 90px; border-radius: 10px; object-fit: cover;">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="showScarf()">목도리 획득하기</button>
+        </div>
+    </div>
+     <div id="scarfScreen" class="screen">
+        <div class="container">
+            <div class="scarf-only">
+                <div class="sparkle-layer"></div>
+                <div class="sparkle-layer layer2"></div>
+
+                <div class="scarf-wrap">
+                    <img src="목도리.png" alt="목도리" class="scarf-img">
+                    <div class="sparkle-burst"></div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="backToMain()">메인으로</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

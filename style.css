@@ -1,0 +1,508 @@
+/* ================================
+   Pingu Scarf Game - FINAL style.css
+   - Background: light icy sky + igloo tile pattern
+   - Game card: white + shadow + rounded
+   - Card width: about 2x wider (max 760px)
+   - Stage UI: restore original "pretty" boxes/buttons
+   - Pingu images: same size on ALL screens
+   - Fail screen: more spacing between text and button
+================================ */
+
+/* 0) Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+
+/* 1) Page background — 단색 연하늘 */
+body{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+
+  background:#eaf6ff;
+  position: relative;
+}
+
+/* ✅ 이글루 벽돌 패턴(줄마다 반칸 어긋남) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+
+  opacity: .6; /* 선 진하게/연하게 조절 */
+
+  /* 패턴 타일 크기(여기서 벽돌 크기 바뀜) */
+  --tileW: 240px;
+  --tileH: 160px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='160' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='none'/%3E%3Cg stroke='rgba(255,255,255,0.95)' stroke-width='3' stroke-linecap='round'%3E%3C!-- horizontal mortar lines --%3E%3Cpath d='M0 0H240M0 80H240M0 160H240'/%3E%3C!-- row 1 vertical joints (aligned) --%3E%3Cpath d='M0 0V80M120 0V80M240 0V80'/%3E%3C!-- row 2 vertical joints (shifted half) --%3E%3Cpath d='M60 80V160M180 80V160'/%3E%3C/g%3E%3C/svg%3E");
+
+  background-repeat: repeat;
+  background-size: var(--tileW) var(--tileH);
+
+  /* 살짝 위치 오프셋(이거 바꾸면 벽돌 위치 느낌 달라짐) */
+  background-position: 0 0;
+}
+
+
+/* 2) Game card (wider, white, shadow) */
+.game-card{
+  width: min(760px, 94vw);   /* 2배 느낌으로 확장 */
+  height: 560px;             /* 고정 높이(스크롤바 덜 생기게) */
+  background: #ffffff;
+
+  border-radius: 24px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 2px 10px rgba(0, 0, 0, 0.06);
+
+  position: relative;
+  overflow: hidden;
+  padding: 30px 26px;
+}
+
+/* 3) Screen switching */
+.screen{
+  position:absolute;
+  inset:0;
+
+  padding: 30px 26px;
+
+  display:none;
+  opacity:0;
+  pointer-events:none;
+
+  /* layout */
+  text-align:center;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+
+  /* avoid scrollbars by default */
+  overflow:hidden;
+}
+
+.screen.active{
+  display:flex;
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* 4) Pingu image size unified everywhere */
+:root{
+  --pingu-size: 260px;   /* 메인 화면 기준으로 큼직하게 */
+}
+
+.penguin-welcome img,
+.penguin-final img,
+.penguin-fail img,
+.penguin-sad img,
+.penguin-celebrate img{
+  width: min(var(--pingu-size), 78vw) !important;
+  max-width: min(var(--pingu-size), 78vw) !important;
+  height: auto !important;
+
+  display:block;
+  margin: 0 auto 10px auto;
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+}
+
+/* if svg is used */
+.penguin-welcome svg,
+.penguin-final svg,
+.penguin-fail svg,
+.penguin-sad svg,
+.penguin-celebrate svg{
+  width: min(var(--pingu-size), 78vw) !important;
+  max-width: min(var(--pingu-size), 78vw) !important;
+  height: auto !important;
+  display:block;
+  margin: 0 auto 10px auto;
+}
+
+/* 5) Typography */
+h1{
+  color:#fd79a8;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+p{
+  color:#4b5563;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* 6) Buttons */
+.btn{
+  border:none;
+  cursor:pointer;
+
+  padding: 16px 40px;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: 900;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  margin: 10px 0;
+}
+
+.btn:active{ transform: translateY(1px) scale(0.99); }
+
+.btn-primary{
+  color:#fff;
+  background: linear-gradient(135deg, #ff7675 0%, #fd79a8 100%);
+  box-shadow: 0 10px 22px rgba(253, 121, 168, 0.35);
+}
+.btn-primary:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+
+.btn-secondary{
+  color:#fff;
+  background: #74b9ff;
+}
+.btn-secondary:hover{ background: #0984e3; }
+
+.btn-success{
+  color:#fff;
+  background: #00b894;
+}
+.btn-success:hover{ background: #00a883; }
+
+.btn-danger{
+  color:#fff;
+  background: #fd79a8;
+}
+.btn-danger:hover{ background: #fab1a0; }
+
+/* 7) Countdown */
+.countdown-display{
+  font-size: 96px;
+  font-weight: 900;
+  color:#fd79a8;
+  line-height: 1;
+}
+
+/* 8) GAME SCREEN — restore original pretty stage UI */
+#gameScreen{
+  justify-content:flex-start;
+  padding-top: 18px;
+  gap: 12px;
+}
+
+/* stage title */
+.stage-info{
+  margin-bottom: 6px;
+}
+#stageName{
+  color:#fd79a8;
+  font-size: 34px;
+  font-weight: 900;
+}
+#stageDesc{
+  color:#6b7280;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+/* sequence box */
+.sequence-display{
+  width: 100%;
+  background: white;
+  border: 3px dashed #fd79a8;
+  border-radius: 16px;
+  padding: 14px 14px;
+  margin-bottom: 10px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.sequence-title{
+  color:#fd79a8;
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#sequenceArrows{
+  display:flex;
+  justify-content:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 45px;
+  align-items: center;
+}
+
+.arrow{
+  font-size: 38px;
+  line-height: 1;
+}
+
+#sequenceTimer{
+  color:#ff7675;
+  font-size: 12px;
+  margin-top: 8px;
+  font-weight: 900;
+}
+
+/* player input area */
+.player-input-area{
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.player-title{
+  color:#636e72;
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#playerArrows{
+  display:flex;
+  justify-content:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 45px;
+  align-items: center;
+
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.player-arrow{
+  font-size: 30px;
+}
+
+/* controls */
+.button-controls{
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.arrow-buttons{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+/* arrow buttons */
+.arrow-btn{
+  aspect-ratio: 1;
+  font-size: 34px;
+  border: 2px solid #74b9ff;
+  background: white;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.arrow-btn:hover{
+  background: #e0f2ff;
+  transform: scale(1.03);
+}
+.arrow-btn:active{
+  transform: scale(0.98);
+}
+
+/* 9) Success screen */
+#successMessage{
+  color:#00b894;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.scarf-progress{
+  font-size: 56px;
+  margin: 18px 0;
+  height: 64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 10) Fail screen — 더 띄우기 */
+#failScreen p{
+  margin-bottom: 26px; /* 문구-버튼 간격 */
+}
+#failScreen .btn{
+  margin-top: 18px;
+}
+
+/* 11) Final fireworks layer (kept) */
+#finalScreen{ overflow:hidden; }
+.fireworks{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.firework{
+  position:absolute;
+  font-size: 44px;
+  animation: fireworkBurst 1s ease-out forwards;
+}
+@keyframes fireworkBurst{
+  0%{ opacity:1; transform: translate(0,0) scale(1); }
+  100%{ opacity:0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+/* 12) Responsive */
+@media (max-width: 540px){
+  :root{ --pingu-size: 220px; }
+  .game-card{ height: 560px; padding: 26px 16px; }
+  .screen{ padding: 26px 16px; }
+
+  h1{ font-size: 38px; }
+  p{ font-size: 16px; }
+
+  .btn{ font-size: 20px; padding: 14px 30px; }
+
+  .arrow-buttons{ grid-template-columns: repeat(2, 1fr); }
+  .arrow-btn{ font-size: 32px; border-radius: 14px; }
+}
+
+/* ===== 화살표 버튼 그리드: 중앙정렬 + 스테이지별 사이즈(JS가 --btnSize로 설정) ===== */
+#arrowButtons {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 14px;
+  --btnSize: 165px; /* 기본값, JS가 덮어씀 */
+}
+
+#arrowButtons .arrow-btn {
+  width: var(--btnSize);
+  height: var(--btnSize);
+  aspect-ratio: auto;
+  font-size: 34px;
+  border-radius: 18px;
+  border: 2px solid #8fb5ff;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+#arrowButtons .arrow-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+#arrowButtons .arrow-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* ===== 목도리 획득 화면 ===== */
+.scarf-only{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.scarf-wrap{
+  position: relative;
+  width: min(520px, 80vw);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.scarf-img{
+  width: 25%;     /* ← 기존 100%에서 25%로 */
+  max-width: 140px;  /* 너무 커지는 것 방지 (원하면 숫자 조절) */
+  height: auto;
+  display:block;
+  margin:0 auto;
+}
+
+
+@keyframes scarfFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-10px); }
+}
+
+/* 반짝 레이어 */
+.sparkle-layer{
+  position:absolute;
+  inset:-40px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.95) 0 2px, transparent 3px) 0 0/60px 60px,
+    radial-gradient(circle at 70% 40%, rgba(255,255,255,0.75) 0 2px, transparent 3px) 0 0/90px 90px,
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,0.85) 0 2px, transparent 3px) 0 0/75px 75px;
+  opacity: .65;
+  animation: sparkleMove 4.6s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.sparkle-layer.layer2{
+  opacity: .45;
+  animation-duration: 6.2s;
+  filter: blur(0.3px);
+}
+
+@keyframes sparkleMove{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(-60px,-40px,0); }
+}
+
+.sparkle-burst{
+  position:absolute;
+  inset:-10%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255,255,255,0.0) 0 35%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0.0) 60%),
+    radial-gradient(circle at 20% 55%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 75%, rgba(255,255,255,0.9) 0 2px, transparent 3px);
+  animation: burst 1.4s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes burst{
+  0%{ opacity:.35; transform: scale(0.98); }
+  50%{ opacity:.75; transform: scale(1.02); }
+  100%{ opacity:.35; transform: scale(0.98); }
+}
+
+/* JS가 지정한 버튼 사이즈를 항상 따르도록 강제 */
+#arrowButtons .arrow-btn {
+  width: var(--btnSize) !important;
+  height: var(--btnSize) !important;
+}
