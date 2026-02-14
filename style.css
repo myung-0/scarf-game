@@ -365,17 +365,6 @@ p{
   .arrow-btn{ font-size: 32px; border-radius: 14px; }
 }
 
-/* ===== 화살표 버튼 그리드: 중앙정렬 + 스테이지별 사이즈(JS가 --btnSize로 설정) ===== */
-#arrowButtons {
-  display: grid;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  margin-top: 14px;
-  --btnSize: 165px; /* 기본값, JS가 덮어씀 */
-}
 
 #arrowButtons .arrow-btn {
   width: var(--btnSize);
@@ -481,11 +470,6 @@ p{
   100%{ opacity:.35; transform: scale(0.98); }
 }
 
-/* JS가 지정한 버튼 사이즈를 항상 따르도록 강제 */
-#arrowButtons .arrow-btn {
-  width: var(--btnSize) !important;
-  height: var(--btnSize) !important;
-}
 
 /* 📱 모바일 대응 */
 @media (max-width: 600px) {
@@ -506,18 +490,7 @@ p{
   }
 }
 
-/* ✅ 모든 스테이지 화살표 버튼을 "스테이지5 크기"로 통일 */
-:root{
-  --btnSize: 120px;
-}
 
-/* JS가 설정하는 값보다 이게 이기도록 !important */
-#arrowButtons{
-  grid-template-columns: repeat(4, var(--btnSize)) !important;
-  justify-content: center !important;
-  justify-items: center !important;
-  gap: 12px !important;
-}
 
 #arrowButtons .arrow-btn{
   width: var(--btnSize) !important;
@@ -525,8 +498,8 @@ p{
   font-size: 30px !important;
 }
 
-/* ✅ 화살표 버튼: 전 스테이지 스테이지5 크기(120px)로 통일 + 가운데정렬 */
-:root{ --btnSize: 120px; }
+/* ✅ 화살표 버튼: 전 스테이지 스테이지5 크기(95px)로 통일 + 가운데정렬 */
+:root{ --btnSize: 95px; }
 
 #arrowButtons{
   display: grid !important;

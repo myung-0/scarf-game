@@ -153,11 +153,6 @@ function renderArrowButtons() {
   // ✅ 스테이지5(8개)는 버튼을 더 작게 해서 2줄이 카드 안에 다 보이게
   const btnSize = (n === 8) ? 95 : (n === 4) ? 150 : 170;
 
-  // CSS 변수로 버튼 크기 전달
-  container.style.setProperty('--btnSize', `${btnSize}px`);
-
-  // 컬럼도 "고정폭 버튼" 기준으로 설정
-  container.style.gridTemplateColumns = `repeat(${cols}, var(--btnSize))`;
 
   stage.selectableDirections.forEach(direction => {
     const btn = document.createElement('button');
