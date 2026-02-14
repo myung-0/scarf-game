@@ -530,3 +530,22 @@ p{
     justify-content: center;
   }
 }
+
+/* ✅ 모든 스테이지 화살표 버튼을 "스테이지5 크기"로 통일 */
+:root{
+  --btnSize: 120px;
+}
+
+/* JS가 설정하는 값보다 이게 이기도록 !important */
+#arrowButtons{
+  grid-template-columns: repeat(4, var(--btnSize)) !important;
+  justify-content: center !important;
+  justify-items: center !important;
+  gap: 12px !important;
+}
+
+#arrowButtons .arrow-btn{
+  width: var(--btnSize) !important;
+  height: var(--btnSize) !important;
+  font-size: 30px !important;
+}
